@@ -4,7 +4,5 @@ package com.gdxtemplate.game;
 
 public class Player {
 	
-	public void PlayerMove() {
-		
-	}
+	
 }

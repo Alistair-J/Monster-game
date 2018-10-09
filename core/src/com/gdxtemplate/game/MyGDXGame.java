@@ -10,7 +10,6 @@ public class MyGDXGame extends ApplicationAdapter {
 
 	ShapeRenderer sr;
 
-
 	@Override
 	public void create() {
 		sr = new ShapeRenderer();
@@ -23,9 +22,8 @@ public class MyGDXGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Grid level = new Grid();
-		level.init(sr);
-
-		move();
+		level.init(sr, move());
+		
 		
 		
 	}
@@ -34,8 +32,8 @@ public class MyGDXGame extends ApplicationAdapter {
 	public void dispose() {
 
 	}
-	public void move() {
-		char input;
+	public char move() {
+		char input = 0;
 		
 		if (Gdx.input.isKeyJustPressed(Keys.W)) { //Takes Key 'W' to use in render cycle
 			input = 'W';
@@ -52,6 +50,8 @@ public class MyGDXGame extends ApplicationAdapter {
 		if (Gdx.input.isKeyJustPressed(Keys.D)) { //Takes Key 'D' to use in render cycle
 			input = 'D';
 		}
+		
+		return input;
 
 	}
 
