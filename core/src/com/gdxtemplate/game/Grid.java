@@ -2,6 +2,7 @@
 package com.gdxtemplate.game;
 
 //Importing utilities
+import java.util.Random;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -19,6 +20,7 @@ public class Grid {
 	
 	Player UsePlayer = new Player();
 	Treasure UseTreasure = new Treasure();
+	Random Random = new Random();
 	
 	public void init(ShapeRenderer sr, char Direction) {
 	
@@ -63,11 +65,18 @@ public class Grid {
 			UsePlayer.SetPlayerX(A);
 		}
 		
-		if (UseTreasure.GetGoldX() != UsePlayer.GetPlayerX() || UseTreasure.GetGoldY() != UsePlayer.GetPlayerY()) {
-			sr.begin(ShapeType.Filled);
-			sr.setColor(1,0,1,1);
-			sr.rect(UseTreasure.GetGoldX(), UseTreasure.GetGoldY(), 50, 50);		
-			sr.end();
+		if (UseTreasure.GetGoldX() == UsePlayer.GetPlayerX() && UseTreasure.GetGoldY() == UsePlayer.GetPlayerY()) {
+			UseTreasure.SetCollected(1);
+			
+		}
+		
+		else {
+			if (UseTreasure.GetCollected() != 1) {
+				sr.begin(ShapeType.Filled);
+				sr.setColor(1,1,0,0);
+				sr.rect(UseTreasure.GetGoldX(), UseTreasure.GetGoldY(), 50, 50);		
+				sr.end();
+			}
 		}
 		
 		sr.begin(ShapeType.Filled);
