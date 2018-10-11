@@ -37,16 +37,16 @@ public class MyGDXGame extends ApplicationAdapter {
 		
 		if (Gdx.input.isKeyJustPressed(Keys.W)) { //Takes Key 'W' to use in render cycle
 			input = 'W';
-
 		}
+		
 		if (Gdx.input.isKeyJustPressed(Keys.A)) { //Takes Key 'A' to use in render cycle
 			input = 'A';
-
 		}
+		
 		if (Gdx.input.isKeyJustPressed(Keys.S)) { //Takes Key 'S' to use in render cycle
 			input = 'S';
-
 		}
+		
 		if (Gdx.input.isKeyJustPressed(Keys.D)) { //Takes Key 'D' to use in render cycle
 			input = 'D';
 		}
