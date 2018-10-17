@@ -20,14 +20,18 @@ public class Grid {
 	
 	Player UsePlayer = new Player();
 	Treasure UseTreasure = new Treasure();
+	Monster UseMonster = new Monster();
 	Random Random = new Random();
 	
 	public void init(ShapeRenderer sr, char Direction) {
 	
 		
 		for (int i = 0; i < GridY ; i++) {
+			
 			X = 10;
+			
 			for (int j = 0; j < GridX ; j++) {
+				
 				sr.begin(ShapeType.Filled);
 				sr.setColor(1, 1, 1, 1);
 				sr.rect(X, Y, 50, 50);
@@ -42,15 +46,19 @@ public class Grid {
 		}
 		
 		if (Direction == 'W') {
+			
 			B = UsePlayer.GetPlayerY();
 			A = B + 60;
 			UsePlayer.SetPlayerY(A);
+			
 		}
 		
 		if (Direction == 'A') {
+			
 			B = UsePlayer.GetPlayerX();
 			A = B - 60;
 			UsePlayer.SetPlayerX(A);
+			
 		}
 		
 		if (Direction == 'S') {
@@ -60,22 +68,27 @@ public class Grid {
 		}
 		
 		if (Direction == 'D') {
+			
 			B = UsePlayer.GetPlayerX();
 			A = B + 60;
 			UsePlayer.SetPlayerX(A);
+			
 		}
 		
 		if (UseTreasure.GetGoldX() == UsePlayer.GetPlayerX() && UseTreasure.GetGoldY() == UsePlayer.GetPlayerY()) {
+			
 			UseTreasure.SetCollected(1);
 			
 		}
 		
 		else {
+			
 			if (UseTreasure.GetCollected() != 1) {
 				sr.begin(ShapeType.Filled);
 				sr.setColor(1,1,0,0);
 				sr.rect(UseTreasure.GetGoldX(), UseTreasure.GetGoldY(), 50, 50);		
 				sr.end();
+				
 			}
 		}
 		
@@ -85,6 +98,40 @@ public class Grid {
 		sr.end();
 		
 		
+		sr.begin(ShapeType.Filled);
+		sr.setColor(1, 0, 1, 0);
+		sr.rect(UseMonster.GetMonsterX(), UseMonster.GetMonsterY(), 50, 50);		
+		sr.end();
+		
+		if (UseMonster.GetMonsterState() == "Sleeping") {
+			
+			if (UsePlayer.GetPlayerX() - UseMonster.GetMonsterX() <= 150 && UsePlayer.GetPlayerX() - UseMonster.GetMonsterX() >= -150 && UsePlayer.GetPlayerY() - UseMonster.GetMonsterY() <= 150 && UsePlayer.GetPlayerY() - UseMonster.GetMonsterY() >= -150) {
+				UseMonster.SetMonsterState("Awake");
+				
+			}
+		}
+		if(UseMonster.GetMonsterState() == "Awake") {
+			if(UsePlayer.GetPlayerX() > UseMonster.GetMonsterX() && UsePlayer.GetPlayerX() - UseMonster.GetMonsterX() < UsePlayer.GetPlayerY() - UseMonster.GetMonsterY()) {
+				UseMonster.SetMonsterX(UseMonster.GetMonsterX() + 60);
+			}
+			if(UsePlayer.GetPlayerX() < UseMonster.GetMonsterX() && UsePlayer.GetPlayerX() - UseMonster.GetMonsterX() < UsePlayer.GetPlayerY() - UseMonster.GetMonsterY()) {
+				UseMonster.SetMonsterX(UseMonster.GetMonsterX() - 60);
+			}
+			if(UsePlayer.GetPlayerY() > UseMonster.GetMonsterY() && UsePlayer.GetPlayerY() - UseMonster.GetMonsterY() < UsePlayer.GetPlayerX() - UseMonster.GetMonsterX()) {
+				UseMonster.SetMonsterY(UseMonster.GetMonsterY() + 60);
+			}
+			if(UsePlayer.GetPlayerY() < UseMonster.GetMonsterY() && UsePlayer.GetPlayerY() - UseMonster.GetMonsterY() < UsePlayer.GetPlayerX() - UseMonster.GetMonsterX()) {
+				UseMonster.SetMonsterY(UseMonster.GetMonsterY() - 60);
+			}
+		}
+		
+		
+		
+		if (UsePlayer.GetPlayerX() == UseMonster.GetMonsterX() && UsePlayer.GetPlayerY() == UseMonster.GetMonsterY()) {
+			
+			System.out.println("Game over!");
+			System.exit(0);
+		}
 		
 	}
 
