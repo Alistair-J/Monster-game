@@ -2,7 +2,6 @@
 package com.gdxtemplate.game;
 
 //Importing utilities
-import java.util.Random;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -21,7 +20,6 @@ public class Grid {
 	Player UsePlayer = new Player();
 	Treasure UseTreasure = new Treasure();
 	Monster UseMonster = new Monster();
-	Random Random = new Random();
 	
 	public void init(ShapeRenderer sr, char Direction) {
 	
@@ -31,11 +29,10 @@ public class Grid {
 			X = 10;
 			
 			for (int j = 0; j < GridX ; j++) {
-				
-				sr.begin(ShapeType.Filled);
-				sr.setColor(1, 1, 1, 1);
-				sr.rect(X, Y, 50, 50);
-				sr.end();
+					sr.begin(ShapeType.Filled);
+					sr.setColor(1, 1, 1, 1);
+					sr.rect(X, Y, 50, 50);
+					sr.end();
 				
 				X += 60;
 				
@@ -110,21 +107,20 @@ public class Grid {
 				
 			}
 		}
+		
 		if(UseMonster.GetMonsterState() == "Awake") {
-			if(UsePlayer.GetPlayerX() > UseMonster.GetMonsterX() && UsePlayer.GetPlayerX() - UseMonster.GetMonsterX() < UsePlayer.GetPlayerY() - UseMonster.GetMonsterY()) {
+			if(UsePlayer.GetPlayerX() > UseMonster.GetMonsterX() && UseMonster.GetMonsterX() - UsePlayer.GetPlayerX() < UseMonster.GetMonsterY() - UsePlayer.GetPlayerY()) {
 				UseMonster.SetMonsterX(UseMonster.GetMonsterX() + 60);
 			}
-			if(UsePlayer.GetPlayerX() < UseMonster.GetMonsterX() && UsePlayer.GetPlayerX() - UseMonster.GetMonsterX() < UsePlayer.GetPlayerY() - UseMonster.GetMonsterY()) {
-				UseMonster.SetMonsterX(UseMonster.GetMonsterX() - 60);
+			if(UsePlayer.GetPlayerX() < UseMonster.GetMonsterX() && UsePlayer.GetPlayerX() - UseMonster.GetMonsterX() < UsePlayer.GetPlayerY() - UseMonster.GetMonsterY()) {					UseMonster.SetMonsterX(UseMonster.GetMonsterX() - 60);
 			}
-			if(UsePlayer.GetPlayerY() > UseMonster.GetMonsterY() && UsePlayer.GetPlayerY() - UseMonster.GetMonsterY() < UsePlayer.GetPlayerX() - UseMonster.GetMonsterX()) {
+			if(UsePlayer.GetPlayerY() > UseMonster.GetMonsterY() && UseMonster.GetMonsterY() - UsePlayer.GetPlayerY() < UseMonster.GetMonsterX() - UsePlayer.GetPlayerX()) {
 				UseMonster.SetMonsterY(UseMonster.GetMonsterY() + 60);
 			}
 			if(UsePlayer.GetPlayerY() < UseMonster.GetMonsterY() && UsePlayer.GetPlayerY() - UseMonster.GetMonsterY() < UsePlayer.GetPlayerX() - UseMonster.GetMonsterX()) {
 				UseMonster.SetMonsterY(UseMonster.GetMonsterY() - 60);
 			}
 		}
-		
 		
 		
 		if (UsePlayer.GetPlayerX() == UseMonster.GetMonsterX() && UsePlayer.GetPlayerY() == UseMonster.GetMonsterY()) {

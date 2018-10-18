@@ -1,10 +1,13 @@
 package com.gdxtemplate.game;
 
+import java.util.Random;
+
 public class Monster {
 	
 	private static int MonsterX = 370;
 	private static int MonsterY = 370;
 	private static String State = "Sleeping";
+	Random skip = new Random();
 	
 	public int GetMonsterX() {
 
@@ -39,5 +42,6 @@ public class Monster {
 		State = b;
 
 	}
+
 
 }
